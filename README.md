@@ -47,12 +47,20 @@ tratamento = BeautifulSoup(requisicao.text, 'html.parser')
 
 site = tratamento.find('table', {'class':'default-table'})
 ```
+```
+print(site)
+```
+![img](https://github.com/yuri98s/colab_gspread/blob/main/Screenshots/html.jpeg)
 * Nesta etapa usamos a bibliotéca Pandas para ler tabelas HTML diretamente de uma string ou de um arquivo HTML, armazená-las na variável "tabela" e excluírmos colunas irrelevantes.
 
 ```
 tabela = pd.read_html(str(site))
 tabela = tabela[0].drop(columns=['Unnamed: 1'])
 ```
+```
+print(tabela)
+```
+![img](https://github.com/yuri98s/colab_gspread/blob/main/Screenshots/tabela.jpeg)
 ___________________________________________________________________________________________________
 **INTEGRAR COLAB E PLANILHAS**
 * auth.authenticate_user()<br/>
@@ -74,6 +82,8 @@ gc = gspread.authorize(creds)
 ```
 gc.create('Cotacao')
 ```
+![img](https://github.com/yuri98s/colab_gspread/blob/main/Screenshots/arquivo.jpeg)
+
 *  Este bloco de código abre a planilha mencionada entre parênteses e a armazena na variável 'planilha'.
 ```
 planilha = gc.open('Cotacao')
@@ -82,6 +92,8 @@ planilha = gc.open('Cotacao')
 ```
 gc.import_csv(planilha.id, tabela.to_csv(index=False))
 ```
+![img](https://github.com/yuri98s/colab_gspread/blob/main/Screenshots/planilha.jpeg)
+
 
 
 
