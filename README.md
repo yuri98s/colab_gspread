@@ -31,13 +31,21 @@ Aqui, você está configurando um cabeçalho que imita o comportamento de um nav
 Essa linha envia uma solicitação para o site no endereço definido, usando os cabeçalhos especificados. Em resposta, você recebe o conteúdo da página.
 
 * Tratar o conteúdo da resposta: tratamento = BeautifulSoup(requisicao.text, 'html.parser')<br/>
-Depois de receber o conteúdo da página, essa linha usa a biblioteca BeautifulSoup para transformar o HTML da página em um formato mais fácil de manipular e analisar. 
+Depois de receber o conteúdo da página, essa linha usa a biblioteca BeautifulSoup para transformar o HTML da página em um formato mais fácil de manipular e analisar.
+
+* O código site = tratamento.find('table', {'class':'default-table'}) faz o seguinte:<br/>
+
+    _Dentro do HTML armazenado em 'tratamento', ele procura pela primeira tag 'table' que tenha a classe default-table.<br/>_
+    _Depois de encontrar essa tabela, o resultado é armazenado na variável 'site'._<br/>
+
 ```
 URL = 'https://www.infomoney.com.br/ferramentas/cambio/'
 HEADERS = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'}
 
 requisicao = requests.get(URL, headers=HEADERS)
 tratamento = BeautifulSoup(requisicao.text, 'html.parser')
+
+site = tratamento.find('table', {'class':'default-table'})
 ```
 * Nesta etapa usamos a bibliotéca Pandas para ler tabelas HTML diretamente de uma string ou de um arquivo HTML, armazená-las na variável "tabela" e excluírmos colunas irrelevantes.
 
